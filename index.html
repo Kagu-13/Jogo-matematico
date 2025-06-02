@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A Jornada Matemática</title>
+    
+    <!-- Estilos CSS modularizados -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/menu.css">
+    <link rel="stylesheet" href="css/game.css">
+    <link rel="stylesheet" href="css/map.css">
+    
+    <!-- Fonte Medieval para o tema RPG -->
+    <link href="https://fonts.googleapis.com/css2?family=MedievalSharp&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <!-- TELA DE MENU PRINCIPAL -->
+        <div id="menu-screen" class="screen">
+            <h1 class="game-title">A Jornada Matemática</h1>
+            
+            <div class="menu-buttons">
+                <button id="start-button" class="rpg-button menu-button">
+                    Iniciar Aventura
+                    <span class="menu-button-number">1</span>
+                </button>
+                
+                <button id="how-to-play-button" class="rpg-button menu-button">
+                    Como Jogar
+                    <span class="menu-button-number">2</span>
+                </button>
+                
+                <button id="credits-button" class="rpg-button menu-button">
+                    Créditos
+                    <span class="menu-button-number">3</span>
+                </button>
+            </div>
+        </div>
+        
+        <!-- TELA DE INTRODUÇÃO -->
+        <div id="intro-screen" class="screen">
+            <h2 class="rpg-subtitle">O Início da Aventura</h2>
+            
+            <div class="narrative-content">
+                <p>Em um mundo onde números e equações controlam a magia, você é um jovem aprendiz de mago com um talento especial para matemática.</p>
+                <p>O Grande Mago Algebrius convocou você para uma missão importante: recuperar os 5 Cristais do Conhecimento que foram roubados e escondidos em 5 reinos diferentes.</p>
+                <p>Cada cristal está protegido por enigmas matemáticos que apenas um verdadeiro mestre pode resolver.</p>
+                <p>Sua jornada começa na Floresta Encantada, onde o primeiro cristal aguarda...</p>
+            </div>
+            
+            <button id="start-journey" class="rpg-button">Começar Jornada</button>
+        </div>
+        
+        <!-- TELA DE COMO JOGAR -->
+        <div id="how-to-play-screen" class="screen">
+            <h2 class="rpg-subtitle">Como Jogar</h2>
+            
+            <div class="narrative-content">
+                <p>Bem-vindo à Jornada Matemática, aventureiro!</p>
+                <p>Neste mundo mágico, você usará seus conhecimentos matemáticos para superar desafios e atravessar 5 reinos diferentes.</p>
+                
+                <p><strong>Regras:</strong></p>
+                <ul class="instruction-list">
+                    <li>Você começa com 3 poções de vida</li>
+                    <li>Cada resposta incorreta consome uma poção</li>
+                    <li>Acerte 5 desafios para avançar ao próximo reino</li>
+                    <li>Complete todos os 5 reinos para se tornar o Mestre da Matemática</li>
+                </ul>
+                
+                <p><strong>Reinos:</strong></p>
+                <ul class="instruction-list">
+                    <li>Floresta Encantada: Equações de 1º grau</li>
+                    <li>Montanhas Nebulosas: Funções de 1º grau</li>
+                    <li>Cavernas Cristalinas: Equações de 2º grau</li>
+                    <li>Cidade Flutuante: Funções de 2º grau</li>
+                    <li>Castelo do Conhecimento: Desafios mistos</li>
+                </ul>
+            </div>
+            
+            <button class="rpg-button back-to-menu">Voltar ao Menu</button>
+        </div>
+        
+        <!-- TELA DE CRÉDITOS -->
+        <div id="credits-screen" class="screen">
+            <h2 class="rpg-subtitle">Créditos</h2>
+            
+            <div class="credits-content">
+                <p class="credits-title">A Jornada Matemática</p>
+                <p>Um jogo educativo que combina matemática e aventura</p>
+                <p>Desenvolvido por Manus</p>
+                <p class="credits-version">Versão 2.0 - Tema RPG</p>
+                <p>Agradecimentos especiais a todos os professores e estudantes que inspiraram este projeto.</p>
+            </div>
+            
+            <button class="rpg-button back-to-menu">Voltar ao Menu</button>
+        </div>
+        
+        <!-- TELA DE JOGO -->
+        <div id="game-screen" class="screen">
+            <!-- Conteúdo será gerado dinamicamente pelo JavaScript -->
+        </div>
+        
+        <!-- TELA DO MAPA -->
+        <div id="map-screen" class="screen">
+            <h2 class="rpg-subtitle">Mapa da Jornada</h2>
+            
+            <div class="progress-indicator">
+                <span>Progresso:</span>
+                <span id="progress-text">0/5</span>
+            </div>
+            
+            <div class="map-container">
+                <!-- Reino 1 -->
+                <div id="realm-1" class="realm">
+                    <div class="realm-icon">1</div>
+                    <div class="realm-info">
+                        <div class="realm-name">Floresta Encantada</div>
+                        <div class="realm-description">Um lugar místico onde as árvores sussurram equações de 1º grau.</div>
+                        <div class="realm-status">Atual</div>
+                    </div>
+                </div>
+                
+                <!-- Reino 2 -->
+                <div id="realm-2" class="realm">
+                    <div class="realm-icon">2</div>
+                    <div class="realm-info">
+                        <div class="realm-name">Montanhas Nebulosas</div>
+                        <div class="realm-description">Picos nebulosos onde as funções de 1º grau determinam caminhos seguros.</div>
+                        <div class="realm-status">Bloqueado</div>
+                    </div>
+                </div>
+                
+                <!-- Reino 3 -->
+                <div id="realm-3" class="realm">
+                    <div class="realm-icon">3</div>
+                    <div class="realm-info">
+                        <div class="realm-name">Cavernas Cristalinas</div>
+                        <div class="realm-description">Cavernas brilhantes onde cristais mágicos formam equações de 2º grau.</div>
+                        <div class="realm-status">Bloqueado</div>
+                    </div>
+                </div>
+                
+                <!-- Reino 4 -->
+                <div id="realm-4" class="realm">
+                    <div class="realm-icon">4</div>
+                    <div class="realm-info">
+                        <div class="realm-name">Cidade Flutuante</div>
+                        <div class="realm-description">Uma cidade nas nuvens onde as funções de 2º grau controlam as trajetórias voadoras.</div>
+                        <div class="realm-status">Bloqueado</div>
+                    </div>
+                </div>
+                
+                <!-- Reino 5 -->
+                <div id="realm-5" class="realm">
+                    <div class="realm-icon">5</div>
+                    <div class="realm-info">
+                        <div class="realm-name">Castelo do Conhecimento</div>
+                        <div class="realm-description">O lar do Grande Mago Algebrius, guardião de todos os tipos de conhecimento matemático.</div>
+                        <div class="realm-status">Bloqueado</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="continue-button-container">
+                <button id="continue-journey" class="rpg-button">Continuar Jornada</button>
+            </div>
+        </div>
+        
+        <!-- TELA DE GAME OVER -->
+        <div id="game-over-screen" class="screen">
+            <h2 class="rpg-subtitle">Sua Jornada Terminou...</h2>
+            
+            <div class="narrative-content">
+                <p>Infelizmente suas poções acabaram e você não conseguiu completar sua missão.</p>
+                <p>Mas não desista! Todo grande mago falha antes de alcançar a maestria.</p>
+                <p>Deseja tentar novamente?</p>
+            </div>
+            
+            <div class="result-buttons">
+                <button id="try-again-button" class="rpg-button">Tentar Novamente</button>
+                <button id="game-over-menu-button" class="rpg-button secondary-button">Voltar ao Menu</button>
+            </div>
+        </div>
+        
+        <!-- TELA DE VITÓRIA -->
+        <div id="victory-screen" class="screen">
+            <h2 class="rpg-subtitle">Vitória!</h2>
+            
+            <div class="narrative-content">
+                <p>Parabéns, grande mago! Você recuperou todos os 5 Cristais do Conhecimento!</p>
+                <p>Sua maestria em matemática impressionou até mesmo o Grande Mago Algebrius.</p>
+                <p>Os reinos agora estão seguros graças ao seu conhecimento e coragem.</p>
+                <p>Sua lenda será contada por gerações!</p>
+            </div>
+            
+            <div class="result-buttons">
+                <button id="play-again-button" class="rpg-button">Jogar Novamente</button>
+                <button id="victory-menu-button" class="rpg-button secondary-button">Voltar ao Menu</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Scripts JS modularizados (ordem importante) -->
+    <script src="js/config.js"></script>
+    <script src="js/utils.js"></script>
+    <script src="js/map.js"></script>
+    <script src="js/questions.js"></script>
+    <script src="js/game.js"></script>
+    <script src="js/menu.js"></script>
+</body>
+</html>

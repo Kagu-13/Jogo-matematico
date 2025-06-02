@@ -1,0 +1,182 @@
+/**
+ * menu.css
+ * ------------------------------
+ * Estilos específicos para o menu principal do jogo matemático com tema RPG
+ * Contém estilos para a tela de menu, introdução, como jogar e créditos
+ */
+
+/* === MENU PRINCIPAL === */
+#menu-screen {
+    display: block; /* Menu é visível por padrão */
+    text-align: center;
+    background-image: linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.9));
+    z-index: 10; /* Garante que o menu fique acima de outros elementos */
+}
+
+.game-title {
+    font-size: var(--font-size-xxl);
+    color: var(--primary-dark);
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    margin-bottom: var(--spacing-xl);
+    animation: pulse 2s infinite;
+}
+
+.menu-buttons {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--spacing-md);
+    margin-top: var(--spacing-xl);
+}
+
+.menu-button {
+    width: 80%;
+    max-width: 300px;
+    padding: var(--spacing-md);
+    font-size: var(--font-size-lg);
+    position: relative;
+    overflow: hidden;
+}
+
+.menu-button::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0));
+    transform: translateY(-100%);
+    transition: transform var(--transition-normal);
+}
+
+.menu-button:hover::after {
+    transform: translateY(0);
+}
+
+.menu-button-number {
+    position: absolute;
+    right: var(--spacing-sm);
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: var(--secondary-color);
+    color: var(--dark-text);
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: var(--font-size-xs);
+    font-weight: bold;
+}
+
+/* === TELA DE INTRODUÇÃO === */
+#intro-screen {
+    text-align: center;
+}
+
+.narrative-content {
+    background-color: rgba(255, 255, 255, 0.7);
+    border-radius: var(--border-radius);
+    padding: var(--spacing-lg);
+    margin: var(--spacing-lg) 0;
+    border-left: 4px solid var(--primary-color);
+    box-shadow: var(--box-shadow);
+}
+
+.narrative-content p {
+    margin-bottom: var(--spacing-md);
+    font-size: var(--font-size-md);
+    line-height: 1.6;
+}
+
+/* === TELA DE COMO JOGAR === */
+#how-to-play-screen .narrative-content {
+    text-align: left;
+}
+
+.instruction-list {
+    list-style-type: none;
+    margin: var(--spacing-md) 0;
+}
+
+.instruction-list li {
+    margin-bottom: var(--spacing-sm);
+    padding-left: var(--spacing-md);
+    position: relative;
+}
+
+.instruction-list li::before {
+    content: '•';
+    color: var(--primary-color);
+    font-weight: bold;
+    position: absolute;
+    left: 0;
+}
+
+/* === TELA DE CRÉDITOS === */
+#credits-screen {
+    text-align: center;
+}
+
+.credits-content {
+    margin: var(--spacing-xl) 0;
+}
+
+.credits-content p {
+    margin-bottom: var(--spacing-md);
+    font-size: var(--font-size-md);
+}
+
+.credits-title {
+    font-family: var(--title-font);
+    font-size: var(--font-size-lg);
+    color: var(--primary-dark);
+    margin-bottom: var(--spacing-sm);
+}
+
+.credits-version {
+    font-style: italic;
+    color: var(--primary-light);
+    margin-bottom: var(--spacing-lg);
+}
+
+/* === TELAS DE GAME OVER E VITÓRIA === */
+#game-over-screen, #victory-screen {
+    text-align: center;
+}
+
+.result-message {
+    font-size: var(--font-size-lg);
+    margin: var(--spacing-lg) 0;
+    color: var(--primary-dark);
+}
+
+.result-buttons {
+    display: flex;
+    justify-content: center;
+    gap: var(--spacing-md);
+    margin-top: var(--spacing-xl);
+}
+
+/* Animações */
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+/* Responsividade */
+@media (max-width: 480px) {
+    .menu-button {
+        width: 90%;
+        padding: var(--spacing-sm);
+        font-size: var(--font-size-md);
+    }
+    
+    .result-buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+}

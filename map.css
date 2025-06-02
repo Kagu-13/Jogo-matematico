@@ -1,0 +1,195 @@
+/**
+ * map.css
+ * ------------------------------
+ * Estilos específicos para o mapa de progresso do jogo matemático com tema RPG
+ * Contém estilos para visualização do mapa, reinos e indicadores de progresso
+ */
+
+/* === TELA DO MAPA === */
+#map-screen {
+    text-align: center;
+    background-image: linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.9));
+}
+
+.map-title {
+    color: var(--primary-dark);
+    font-size: var(--font-size-xl);
+    margin-bottom: var(--spacing-lg);
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.progress-indicator {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: var(--spacing-lg);
+}
+
+#progress-text {
+    background-color: var(--primary-color);
+    color: var(--light-text);
+    padding: var(--spacing-xs) var(--spacing-md);
+    border-radius: 20px;
+    font-weight: bold;
+    font-size: var(--font-size-md);
+    margin: 0 var(--spacing-sm);
+}
+
+/* === MAPA DOS REINOS === */
+.map-container {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-lg);
+    margin: var(--spacing-xl) 0;
+    position: relative;
+}
+
+/* Linha conectando os reinos */
+.map-container::before {
+    content: '';
+    position: absolute;
+    top: 40px;
+    left: 50%;
+    width: 4px;
+    height: calc(100% - 80px);
+    background-color: var(--primary-light);
+    transform: translateX(-50%);
+    z-index: 0;
+}
+
+/* === REINOS === */
+.realm {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: var(--border-radius);
+    padding: var(--spacing-md);
+    box-shadow: var(--box-shadow);
+    position: relative;
+    z-index: 1;
+    transition: all var(--transition-normal);
+}
+
+.realm-icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: var(--font-size-lg);
+    color: var(--light-text);
+    background-color: var(--primary-color);
+    margin-right: var(--spacing-md);
+    flex-shrink: 0;
+}
+
+.realm-info {
+    flex-grow: 1;
+    text-align: left;
+}
+
+.realm-name {
+    font-family: var(--title-font);
+    font-size: var(--font-size-md);
+    color: var(--primary-dark);
+    margin-bottom: var(--spacing-xs);
+}
+
+.realm-description {
+    font-size: var(--font-size-sm);
+    color: var(--text-color);
+    margin-bottom: var(--spacing-xs);
+}
+
+.realm-status {
+    font-size: var(--font-size-xs);
+    font-weight: bold;
+    padding: var(--spacing-xs) var(--spacing-sm);
+    border-radius: 12px;
+    display: inline-block;
+}
+
+/* === ESTADOS DOS REINOS === */
+.realm.completed {
+    border-left: 4px solid var(--success-color);
+}
+
+.realm.completed .realm-icon {
+    background-color: var(--success-color);
+}
+
+.realm.completed .realm-status {
+    background-color: rgba(46, 204, 113, 0.2);
+    color: var(--success-color);
+}
+
+.realm.current {
+    border-left: 4px solid var(--secondary-color);
+    transform: scale(1.05);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.realm.current .realm-icon {
+    background-color: var(--secondary-color);
+    animation: pulse 2s infinite;
+}
+
+.realm.current .realm-status {
+    background-color: rgba(245, 176, 65, 0.2);
+    color: var(--secondary-dark);
+}
+
+.realm.locked {
+    border-left: 4px solid var(--primary-light);
+    opacity: 0.7;
+    filter: grayscale(50%);
+}
+
+.realm.locked .realm-icon {
+    background-color: var(--primary-light);
+}
+
+.realm.locked .realm-status {
+    background-color: rgba(106, 48, 147, 0.2);
+    color: var(--primary-light);
+}
+
+/* === BOTÃO DE CONTINUAR === */
+.continue-button-container {
+    margin-top: var(--spacing-xl);
+}
+
+#continue-journey {
+    padding: var(--spacing-md) var(--spacing-xl);
+    font-size: var(--font-size-md);
+}
+
+/* Animações */
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .realm {
+        padding: var(--spacing-sm);
+    }
+    
+    .realm-icon {
+        width: 40px;
+        height: 40px;
+        font-size: var(--font-size-md);
+    }
+    
+    .realm-name {
+        font-size: var(--font-size-sm);
+    }
+    
+    .realm-description {
+        font-size: var(--font-size-xs);
+    }
+}
