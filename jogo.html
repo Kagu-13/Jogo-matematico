@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Jornada Matemática</title>
+  <style>
+    body { font-family: Arial, sans-serif; background: #f0f0f0; text-align: center; }
+    .container { background: #fff; margin: 50px auto; padding: 20px; border-radius: 10px; width: 370px; box-shadow: 0 0 10px #ccc; }
+    .option-btn { margin: 8px 0; padding: 10px 20px; border-radius: 6px; border: 1px solid #007bff; background: #fff; color: #007bff; cursor: pointer; }
+    .option-btn:hover { background: #007bff; color: #fff; }
+    #gameover, #derrota { color: #d32f2f; font-weight: bold; margin-top: 20px; }
+    .btn-home {
+      margin-top: 20px;
+      padding: 10px 24px;
+      border-radius: 6px;
+      border: none;
+      background: #007bff;
+      color: #fff;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .btn-home:hover { background: #0056b3; }
+    #narrativa { margin-bottom: 18px; color: #333; font-size: 16px; }
+    #fase { font-weight: bold; margin-bottom: 10px; }
+    #feedback { margin: 10px 0; font-weight: bold; color: #007bff; min-height: 22px; }
+    #vidas { font-weight: bold; color: #d32f2f; margin-bottom: 10px; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Jornada Matemática</h2>
+    <div id="narrativa"></div>
+    <div id="fase"></div>
+    <div id="vidas"></div>
+    <div id="question"></div>
+    <div id="options"></div>
+    <div id="feedback"></div>
+    <div id="score">Pontuação: 0</div>
+    <div id="gameover" style="display:none;"></div>
+    <div id="derrota" style="display:none;"></div>
+  </div>
+  <script>
+    // Narrativas para cada fase
+    const narrativas = [
+      "Bem-vindo(a) à Jornada Matemática! Você é um(a) aventureiro(a) que precisa resolver desafios para avançar pelo Reino dos Números.",
+      "Parabéns! Você chegou à Floresta dos Desafios, onde as perguntas ficam mais difíceis. Continue avançando!",
+      "Incrível! Você chegou ao Castelo dos Gênios. Só os melhores solucionadores chegam aqui. Prepare-se para o desafio final!"
+    ];
+
+    let questions = {};
+    let faseAtual = 1;
+    let indiceQuestao = 0;
+    let score = 0;
+    let acertosNaFase = 0;
+    let vidas = 3;
+    const acertosParaAvancar = 5; // Acertos para passar de fase
+    let faseMaxima = 1;
+    let ordemQuestoes = [];
+
+    async function loadQuestions() {
+      const res = await fetch('questoes.json');
+      const data = await res.json();
+      questions = data;
+      faseMaxima = Object.keys(questions).length;
+      iniciarFase(1);
+    }
+
+    function embaralhar(array) {
+      for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+      }
+      return array;
+    }
+
+    function iniciarFase(fase) {
+      faseAtual = fase;
+      indiceQuestao = 0;
+      acertosNaFase = 0;
+      vidas = 3;
+      document.getElementById("fase").innerText = `Fase ${faseAtual}`;
+      document.getElementById("narrativa").innerText = narrativas[faseAtual - 1] || "";
+      document.getElementById("gameover").style.display = "none";
+      document.getElementById("derrota").style.display = "none";
+      document.getElementById("question").style.display = "";
+      document.getElementById("options").style.display = "";
+      document.getElementById("feedback").innerText = "";
+      document.getElementById("score").innerText = "Pontuação: " + score;
+      document.getElementById("vidas").innerText = "Vidas: " + "❤️".repeat(vidas);
+      // Embaralha a ordem das questões da fase
+      const faseQuestoes = questions[faseAtual] || [];
+      ordemQuestoes = embaralhar([...Array(faseQuestoes.length).keys()]);
+      showQuestion();
+    }
+
+    function showQuestion() {
+      const faseQuestoes = questions[faseAtual];
+      if (!faseQuestoes || indiceQuestao >= ordemQuestoes.length) {
+        avancarFaseOuFinalizar();
+        return;
+      }
+      const q = faseQuestoes[ordemQuestoes[indiceQuestao]];
+      document.getElementById("question").innerText = q.q;
+      const optionsDiv = document.getElementById("options");
+      optionsDiv.innerHTML = "";
+      q.opcoes.forEach(op => {
+        const btn = document.createElement("button");
+        btn.className = "option-btn";
+        btn.innerText = op;
+        btn.onclick = () => checkAnswer(op, q.a);
+        optionsDiv.appendChild(btn);
+      });
+    }
+
+    function checkAnswer(selected, correta) {
+      if (selected == correta) {
+        score += 10;
+        acertosNaFase++;
+        document.getElementById("feedback").innerText = "Correto! Você avança na jornada.";
+        document.getElementById("score").innerText = "Pontuação: " + score;
+        setTimeout(() => {
+          document.getElementById("feedback").innerText = "";
+          indiceQuestao++;
+          if (acertosNaFase >= acertosParaAvancar) {
+            avancarFaseOuFinalizar();
+          } else {
+            showQuestion();
+          }
+        }, 900);
+      } else {
+        vidas--;
+        document.getElementById("vidas").innerText = "Vidas: " + "❤️".repeat(vidas);
+        if (vidas <= 0) {
+          showDerrota();
+        } else {
+          document.getElementById("feedback").innerText = "Ops! Resposta errada. Tente novamente!";
+          setTimeout(() => {
+            document.getElementById("feedback").innerText = "";
+            indiceQuestao++; // Troca para a próxima questão ao errar
+            showQuestion();
+          }, 900);
+        }
+      }
+    }
+
+    function avancarFaseOuFinalizar() {
+      if (faseAtual < faseMaxima) {
+        iniciarFase(faseAtual + 1);
+      } else {
+        showGameOver();
+      }
+    }
+
+    function showGameOver() {
+      document.getElementById("gameover").style.display = "block";
+      document.getElementById("gameover").innerHTML = `
+        Parabéns, aventureiro(a)! Você completou a Jornada Matemática.<br>
+        Pontuação final: ${score}<br>
+        <button class="btn-home" onclick="window.location.href='home.html'">Voltar para o início</button>
+      `;
+      document.getElementById("question").style.display = "none";
+      document.getElementById("options").style.display = "none";
+      document.getElementById("fase").innerText = "";
+      document.getElementById("narrativa").innerText = "";
+      document.getElementById("feedback").innerText = "";
+      document.getElementById("vidas").innerText = "";
+    }
+
+    function showDerrota() {
+      document.getElementById("derrota").style.display = "block";
+      document.getElementById("derrota").innerHTML = `
+        <span style="font-size:1.2em;">Você foi derrotado nesta aventura!<br>
+        Que tal tentar novamente?</span><br>
+        Pontuação final: ${score}<br>
+        <button class="btn-home" onclick="window.location.href='home.html'">Voltar para o início</button>
+      `;
+      document.getElementById("question").style.display = "none";
+      document.getElementById("options").style.display = "none";
+      document.getElementById("fase").innerText = "";
+      document.getElementById("narrativa").innerText = "";
+      document.getElementById("feedback").innerText = "";
+      document.getElementById("vidas").innerText = "";
+    }
+
+    loadQuestions();
+  </script>
+</body>
+</html>
