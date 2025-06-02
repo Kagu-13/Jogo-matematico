@@ -1,0 +1,201 @@
+/* Estilos gerais para o jogo "A Jornada Matemática" - Versão baseada na referência */
+
+@import url('https://fonts.googleapis.com/css2?family=MedievalSharp&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+
+body {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-image: url('../img/forest_background.jpeg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    color: #2c3e50;
+}
+
+.container {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.screen {
+    width: 90%;
+    max-width: 800px;
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+    padding: 30px;
+    display: none;
+    text-align: center;
+    position: relative;
+    border-top: 5px solid #8e44ad;
+}
+
+.game-title {
+    font-family: 'MedievalSharp', cursive;
+    font-size: 3rem;
+    color: #2c3e50;
+    margin-bottom: 40px;
+    text-align: center;
+}
+
+.rpg-subtitle {
+    font-family: 'MedievalSharp', cursive;
+    font-size: 2rem;
+    color: #2c3e50;
+    margin-bottom: 20px;
+}
+
+.rpg-button {
+    background-color: #8e44ad;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 12px 24px;
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: all 0.3s;
+    margin: 10px;
+    position: relative;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.rpg-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+}
+
+.rpg-button:active {
+    transform: translateY(1px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.secondary-button {
+    background-color: #3498db;
+}
+
+.narrative-content {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin-bottom: 30px;
+    text-align: left;
+    color: #2c3e50;
+    background-color: rgba(255, 255, 255, 0.7);
+    padding: 20px;
+    border-radius: 5px;
+    border-left: 4px solid #8e44ad;
+}
+
+.instruction-list {
+    text-align: left;
+    margin-left: 20px;
+    color: #2c3e50;
+}
+
+.instruction-list li {
+    margin-bottom: 10px;
+    position: relative;
+    padding-left: 25px;
+}
+
+.instruction-list li::before {
+    content: "•";
+    position: absolute;
+    left: 0;
+    color: #8e44ad;
+    font-weight: bold;
+}
+
+/* Menu centralizado e estilizado */
+.menu-buttons {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    max-width: 300px;
+}
+
+.menu-button {
+    position: relative;
+    margin-bottom: 15px;
+    width: 100%;
+}
+
+.menu-button-number {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: #f39c12;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.9rem;
+    font-weight: bold;
+}
+
+.credits-content {
+    background-color: rgba(255, 255, 255, 0.7);
+    padding: 20px;
+    border-radius: 5px;
+    margin: 0 auto;
+    max-width: 80%;
+}
+
+.credits-title {
+    font-size: 1.5rem;
+    color: #2c3e50;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+.credits-version {
+    font-style: italic;
+    margin: 15px 0;
+    color: #7f8c8d;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .game-title {
+        font-size: 2.5rem;
+    }
+    
+    .rpg-subtitle {
+        font-size: 1.8rem;
+    }
+    
+    .rpg-button {
+        font-size: 1rem;
+        padding: 10px 20px;
+    }
+    
+    .narrative-content {
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .game-title {
+        font-size: 2rem;
+    }
+    
+    .rpg-subtitle {
+        font-size: 1.5rem;
+    }
+    
+    .screen {
+        padding: 20px;
+    }
+}

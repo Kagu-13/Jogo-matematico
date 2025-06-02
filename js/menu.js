@@ -194,6 +194,45 @@ function showVictory() {
     });
 }
 
+/**
+ * Mostra uma tela específica e oculta as demais
+ * @param {string} screenId - O ID da tela a ser exibida
+ */
+function showScreen(screenId) {
+    // Oculta todas as telas
+    const screens = document.querySelectorAll('.screen');
+    screens.forEach(screen => {
+        screen.style.display = 'none';
+    });
+
+    // Exibe a tela desejada
+    const targetScreen = document.getElementById(screenId);
+    if (targetScreen) {
+        targetScreen.style.display = 'block';
+    } else {
+        console.error(`Tela com ID "${screenId}" não encontrada.`);
+    }
+}
+
+// Exemplo de uso: Vincular botões às telas
+document.getElementById('start-button').addEventListener('click', () => {
+    showScreen('intro-screen');
+});
+
+document.getElementById('how-to-play-button').addEventListener('click', () => {
+    showScreen('how-to-play-screen');
+});
+
+document.getElementById('credits-button').addEventListener('click', () => {
+    showScreen('credits-screen');
+});
+
+document.querySelectorAll('.back-to-menu').forEach(button => {
+    button.addEventListener('click', () => {
+        showScreen('menu-screen');
+    });
+});
+
 // === INICIALIZAÇÃO DO JOGO ===
 
 /**

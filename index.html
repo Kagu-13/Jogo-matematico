@@ -13,6 +13,134 @@
     
     <!-- Fonte Medieval para o tema RPG -->
     <link href="https://fonts.googleapis.com/css2?family=MedievalSharp&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Estilos inline para garantir consistência visual */
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-image: url('img/forest_background.jpeg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: #2c3e50;
+        }
+        
+        .container {
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        .screen {
+            width: auto; /* Largura se ajusta ao conteúdo */
+            min-width: 300px; /* Largura mínima */
+            max-width: 800px; /* Largura máxima */
+            height: auto; /* Altura se ajusta ao conteúdo */
+            min-height: 200px; /* Altura mínima */
+            max-height: 90%; /* Altura máxima relativa à tela */
+            position: absolute; /* Sobrepõe as outras telas */
+            top: 50%; /* Centraliza verticalmente */
+            left: 50%; /* Centraliza horizontalmente */
+            transform: translate(-50%, -50%); /* Ajusta o ponto de referência para o centro */
+            background-color: rgba(255, 255, 255, 0.9); /* Fundo branco com transparência */
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+            padding: 30px;
+            display: none; /* Todas as telas começam ocultas */
+            text-align: center;
+            overflow-y: auto; /* Adiciona barra de rolagem se o conteúdo exceder a altura máxima */
+        }
+
+        #menu-screen {
+            display: block; /* Apenas a tela de menu é visível inicialmente */
+        }
+        
+        .game-title {
+            font-family: 'MedievalSharp', cursive;
+            font-size: 3rem;
+            color: #2c3e50;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+        
+        .rpg-subtitle {
+            font-family: 'MedievalSharp', cursive;
+            font-size: 2rem;
+            color: #2c3e50;
+            margin-bottom: 20px;
+        }
+        
+        .rpg-button {
+            background-color: #8e44ad;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 12px 24px;
+            font-family: 'Roboto', sans-serif;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin: 10px;
+            position: relative;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .rpg-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+        }
+        
+        .rpg-button:active {
+            transform: translateY(1px);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        .menu-buttons {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto;
+            max-width: 300px;
+        }
+        
+        .menu-button {
+            position: relative;
+            margin-bottom: 15px;
+            width: 100%;
+        }
+        
+        .menu-button-number {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: #f39c12;
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9rem;
+            font-weight: bold;
+        }
+        
+        .screen {
+            display: none; /* Todas as telas começam ocultas */
+        }
+
+        #menu-screen {
+            display: block; /* Apenas a tela de menu é visível inicialmente */
+        }
+    </style>
 </head>
 <body>
     <div class="container">
@@ -88,9 +216,9 @@
             <div class="credits-content">
                 <p class="credits-title">A Jornada Matemática</p>
                 <p>Um jogo educativo que combina matemática e aventura</p>
-                <p>Desenvolvido por Manus</p>
-                <p class="credits-version">Versão 2.0 - Tema RPG</p>
-                <p>Agradecimentos especiais a todos os professores e estudantes que inspiraram este projeto.</p>
+                <p>Testado por Francisco Fernandes e Ximenes</p>
+                <p>Desenvolvido Tulio e J. Levi</p>
+                <p class="credits-version">Versão 2.5.4</p>
             </div>
             
             <button class="rpg-button back-to-menu">Voltar ao Menu</button>
@@ -208,5 +336,24 @@
     <script src="js/questions.js"></script>
     <script src="js/game.js"></script>
     <script src="js/menu.js"></script>
+    <script>
+        document.getElementById('start-button').addEventListener('click', () => {
+            showScreen('intro-screen');
+        });
+
+        document.getElementById('how-to-play-button').addEventListener('click', () => {
+            showScreen('how-to-play-screen');
+        });
+
+        document.getElementById('credits-button').addEventListener('click', () => {
+            showScreen('credits-screen');
+        });
+
+        document.querySelectorAll('.back-to-menu').forEach(button => {
+            button.addEventListener('click', () => {
+                showScreen('menu-screen');
+            });
+        });
+    </script>
 </body>
 </html>
